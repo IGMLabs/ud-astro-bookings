@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "7c8e6e54-47f2-41cb-964a-b5b608e33901"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -118,6 +121,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@picocss/pico/css/pico.fluid.classless.min.css",
               "src/styles.css"
             ],
             "scripts": []
