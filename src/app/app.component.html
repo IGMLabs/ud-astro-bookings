@@ -1,45 +1,14 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<!-- -->
 <body>
-<header>
-  <nav>
-    <ul>
-      <li>
-  <strong> 🚀 {{ title | uppercase}}</strong>
-</li>
-</ul>
-</nav>
-</header>
-<main>
-  <article>
-    <h3> work with {{ getAgenciesLength() }} agencies</h3>
-    <ul>
-      <li *ngFor="let agency of agencies">
-        <span [ngClass]="agency.status | lowercase">{{ agency.name}}</span>
-        <ng-container *ngIf="agency.range ==='Interplanetary' then  interplanetary; else orbital"> Esto sale</ng-container>
-        <ng-template #interplanetary>✨ </ng-template>
-        <ng-template #orbital>🌎 </ng-template>
-       <!--  <span *ngIf="agency.range ==='Interplanetary'">✨</span>-->
-       <!--  <span *ngIf="agency.range ==='Orbital'">🌎</span> -->
-      </li>
-    </ul>
-    <button (click)="reload()"> 🌵  </button>
-  </article>
-  <aside *ngIf="reloading"> 🌵 Reloading</aside>
+  <header>
+<app-header></app-header>
+  </header>
+  <main>
+  <!--<app-home></app-home> -->
+  <router-outlet></router-outlet>
 </main>
-<router-outlet></router-outlet>
   <footer>
-    <p> 🚀 {{ title | uppercase}}</p>
-    <p> {{ subtitle }}</p>
+    <p> 🚀 {{ title | uppercase }} </p>
+    <p> {{ subtitle }} </p>
     <a [href]="authorUrl"> {{ author }} </a>
   </footer>
 </body>

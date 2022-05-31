@@ -1,15 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent {
-  public title = 'ud-astro-bookings';
-  public subtitle = 'welcome on board';
-  public author = 'udp';
-  public authorUrl = 'https://picocss.com/docs/';
+export class HomeComponent implements OnInit {
   public agencies = [
     {
       id: 'space-y',
@@ -107,4 +103,9 @@ export class AppComponent {
     return 'orange';
   }
   public reloading =false;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
 }
