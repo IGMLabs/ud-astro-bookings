@@ -1,0 +1,14 @@
+<article>
+  <h3> Number of trips: {{ getTripsLength() }}</h3>
+  <ul>
+    <li *ngFor="let trip of trips">
+      <a [routerLink]="['/','trips','trip',trip.id]" [ngClass]="getClassForStatus(trip.status)">{{ trip.destination }}</a>
+      <ng-container *ngIf="trip.kind === 'WithStay' then withstay; else triponly">
+      </ng-container>
+      <ng-template #withstay> 🛏 </ng-template>
+      <ng-template #triponly> 🛩 </ng-template>
+    </li>
+  </ul>
+  <button (click)="reload('trips')"> ♻ </button>
+</article>
+<app-reloading *ngIf="reloading"></app-reloading>

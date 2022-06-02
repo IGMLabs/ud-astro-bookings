@@ -1,15 +1,25 @@
 <nav>
   <ul>
     <li>
-      <strong>🚀 {{ title | uppercase }}</strong>
+      <a routerLink="/">
+        <strong>
+          <app-title></app-title>
+        </strong>
+      </a>
     </li>
   </ul>
   <ul>
     <li>
-      <a routerLink="/about">ℹ About</a>
+      <a routerLink="trips">✈ Viajes</a>
     </li>
     <li>
-      <a routerLink="/contact">ℹ Contact</a>
+      <a routerLink="agencies">➡ Agencias</a>
+    </li>
+    <li>
+      <a routerLink="auth/register">📋 Register</a>
+    </li>
+    <li>
+      <a routerLink="auth/login">🔐 Login</a>
     </li>
   </ul>
 </nav>

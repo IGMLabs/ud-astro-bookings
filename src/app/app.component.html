@@ -1,14 +1,13 @@
 <body>
   <header>
-<app-header></app-header>
+    <app-header></app-header>
   </header>
   <main>
-  <!--<app-home></app-home> -->
-  <router-outlet></router-outlet>
-</main>
+
+    <!-- <app-home></app-home> -->
+    <router-outlet></router-outlet>
+  </main>
   <footer>
-    <p> 🚀 {{ title | uppercase }} </p>
-    <p> {{ subtitle }} </p>
-    <a [href]="authorUrl"> {{ author }} </a>
+      <app-footer></app-footer>
   </footer>
 </body>
