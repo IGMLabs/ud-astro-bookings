@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
+import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 
 @Component({
   selector: 'app-register-form',
@@ -11,7 +13,7 @@ export class RegisterForm implements OnInit {
 
   public form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, fvs: FormValidationsService, public fms: FormMessagesService) {
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -19,60 +21,24 @@ export class RegisterForm implements OnInit {
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
       acceptTerms: new FormControl(false, [Validators.requiredTrue]),
     }, {
-      validators: [this.passwordMatch]
+      validators: [fvs.passwordMatch]
     });
   }
 
-  private passwordMatch(form: AbstractControl) : ValidationErrors | null {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    if (!password || !confirmPassword) {
-      return {
-        passwordMarch: 'No passwords provided'
-      };
-    }
-    if (password.value !== confirmPassword.value){
-      return {
-        passwordMarch: "Passwords don't mactch"
-      };
-    }
-    return null;
-  }
-
   public hasError(controlName: string):boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false
-    return control.invalid;
+    return this.fms.hasError(this.form, controlName);
   }
 
   public mustShowMessage(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false
-    return control.touched && control.invalid;
-  }
-
-  public getControl(controlName: string): AbstractControl | null {
-    return this.form.get(controlName);
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
   public getErrorMessage(controlName: string): string {
-    const control = this.getControl(controlName);
-    if (!control) return '';
-    if (!control.errors) return '';
-    const errors = control.errors;
-    let errorMessage = '';
-    errorMessage += errors['required'] ? '🔥 Field is required' : '' ;
-    errorMessage += errors['email'] ? '🔥 Field is required' : '' ;
-    errorMessage += errors['minlength'] ? `🔥 More than ${errors['minlength'].requiredLength} chars` : '' ;
-    errorMessage += errors['maxlength'] ? `🔥 Less than ${errors['maxlength'].requiredLength} chars` : '' ;
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   public getPasswordMatchMessage() {
-    const errors = this.form.errors;
-    if (!errors) return '';
-    if (errors['passowrdMatch']) return errors['passwordMatch'];
-    return;
+    return this.fms.getPasswordMatchMessage(this.form);
   }
 
   public onSave() {

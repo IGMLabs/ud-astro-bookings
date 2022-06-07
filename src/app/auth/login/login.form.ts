@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
+import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 
 
 @Component({
@@ -11,7 +13,7 @@ export class LoginForm implements OnInit {
 
   public form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, public fms: FormMessagesService) {
     this.form = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
@@ -20,32 +22,16 @@ export class LoginForm implements OnInit {
 
 
   public hasError(controlName: string):boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false
-    return control.invalid;
+    return this.fms.hasError(this.form, controlName);
   }
 
   public mustShowMessage(controlName: string): boolean {
-    const control = this.getControl(controlName);
-    if (!control) return false
-    return control.touched && control.invalid;
+    return this.fms.mustShowMessage(this.form, controlName);
   }
 
-  public getControl(controlName: string): AbstractControl | null {
-    return this.form.get(controlName);
-  }
 
   public getErrorMessage(controlName: string): string {
-    const control = this.getControl(controlName);
-    if (!control) return '';
-    if (!control.errors) return '';
-    const errors = control.errors;
-    let errorMessage = '';
-    errorMessage += errors['required'] ? '🔥 Field is required' : '' ;
-    errorMessage += errors['email'] ? '🔥 Field is required' : '' ;
-    errorMessage += errors['minlength'] ? `🔥 More than ${errors['minlength'].requiredLength} chars` : '' ;
-    errorMessage += errors['maxlength'] ? `🔥 Less than ${errors['maxlength'].requiredLength} chars` : '' ;
-    return errorMessage;
+    return this.fms.getErrorMessage(this.form, controlName);
   }
 
   public onSave() {

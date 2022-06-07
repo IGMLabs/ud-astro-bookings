@@ -9,8 +9,8 @@ export class FooterComponent implements OnInit {
 
   public title = 'Astro Bookings';
   public subtitle = 'Welcome on board';
-  public author = 'Uxia Diaz';
-  public authorUrl = 'http://spadejj.com';
+  public author = 'Uxía Díaz';
+  public authorUrl = 'https://picocss.com/docs/';
 
   constructor() { }
 
