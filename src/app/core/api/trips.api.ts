@@ -1,32 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Trip } from './trip.interface';
 
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class HomeComponent implements OnInit {
-  public agencies = [
-    {
-      id: 'space-y',
-      name: 'Space Y',
-      range: 'Interplanetary',
-      status: 'Active',
-    },
-    {
-      id: 'green-origin',
-      name: 'Green Origin',
-      range: 'Orbital',
-      status: 'Active',
-    },
-    {
-      id: 'virgin-way',
-      name: 'Virgin Way',
-      range: 'Orbital',
-      status: 'Pending',
-    },
-  ];
-  trips = [
+export class TripsApi {
+  public trips: Trip[] = [
     {
       id: 'space-y-moon-1',
       agencyId: 'space-y',
@@ -89,23 +68,15 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  public getAgenciesLength(){
-    return this.agencies.length;
-  }
-  public reload(list: string) {
-    this.reloading = true;
-    console.log('Reloading...' + list);
-  }
-  public getClassForStatus(status: string) {
-    if (status === 'Confirmed') {
-      return 'green';
-    }
-    return 'orange';
-  }
-  public reloading =false;
-  constructor() { }
-
-  ngOnInit(): void {
+  public getAll(){
+    return this.trips;
   }
 
+  public getById(id: string){
+    return this.trips.find(a=>a.id===id);
+  }
+
+  public post(trip: Trip) {
+    this.trips.push(trip);
+  }
 }
