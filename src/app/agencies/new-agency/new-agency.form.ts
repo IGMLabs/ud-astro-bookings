@@ -22,7 +22,7 @@ export class NewAgencyForm extends FormBase implements OnInit {
   @Input() public statuses: string[] = [];
   @Output() public save = new EventEmitter<Agency>();
 
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, idName: IdNameApi, private agenciesApi: AgenciesApi) {
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, idName: IdNameApi) {
     super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),

@@ -12,10 +12,10 @@ import { TripsApi } from 'src/app/core/api/trips.api';
 })
 export class NewTripPage implements OnInit {
 
-  public agencies: Agency[];
+  public agencies!: Agency[];
 
   constructor(agenciesApi: AgenciesApi, private tripsApi: TripsApi, private router: Router) {
-    this.agencies = agenciesApi.getAll();
+    agenciesApi.getAll().subscribe( (data) => {this.agencies = data});
   }
 
   ngOnInit(): void {

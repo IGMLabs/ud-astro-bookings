@@ -10,11 +10,11 @@ import { Agency } from 'src/app/core/api/agency.interface';
 export class AgencyPage implements OnInit {
 
   public agencyId : string;
-  public agency?: Agency;
+  public agency!: Agency;
 
   constructor(route: ActivatedRoute, private agenciesApi: AgenciesApi) {
     this.agencyId = route.snapshot.paramMap.get('id') || '';
-    this.agency = agenciesApi.getById(this.agencyId);
+    agenciesApi.getById(this.agencyId).subscribe((data) => {this.agency= data});
   }
 
   ngOnInit(): void {
