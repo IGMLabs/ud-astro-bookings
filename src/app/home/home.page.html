@@ -1,3 +1,14 @@
-<app-agencies-list [agencies]="agencies"></app-agencies-list>
-<app-trips-list [trips]="trips"></app-trips-list>
 
+
+<ng-container  *ngIf="(agencies$ | async) as agencies; else waiting">
+  <app-agencies-list  [agencies]="agencies"
+                      (reload)="onReload()"></app-agencies-list>
+</ng-container>
+
+<ng-template #waiting>
+  <h4>Waiting...</h4>
+</ng-template>
+
+<app-trips-list *ngIf="(trips$ | async) as trips"[trips]="trips"></app-trips-list>
+
+<app-bookings-list *ngIf="(bookings$ | async) as bookings"[bookings]="bookings"></app-bookings-list>

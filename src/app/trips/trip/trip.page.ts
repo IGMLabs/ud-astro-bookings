@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Trip } from 'src/app/core/api/trip.interface';
 import { TripsApi } from 'src/app/core/api/trips.api';
 
@@ -10,11 +11,11 @@ import { TripsApi } from 'src/app/core/api/trips.api';
 export class TripPage implements OnInit {
 
   public tripId : string;
-  public trip?: Trip
+  public trip$: Observable<Trip>
 
   constructor(route: ActivatedRoute, tripsApi: TripsApi) {
     this.tripId = route.snapshot.paramMap.get('id') || '';
-    this.trip = tripsApi.getById(this.tripId);
+    this.trip$ = tripsApi.getById$(this.tripId);
   }
 
   ngOnInit(): void {

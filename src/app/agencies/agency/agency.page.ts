@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
 
@@ -10,11 +11,11 @@ import { Agency } from 'src/app/core/api/agency.interface';
 export class AgencyPage implements OnInit {
 
   public agencyId : string;
-  public agency!: Agency;
+  public agency$: Observable<Agency>;
 
-  constructor(route: ActivatedRoute, private agenciesApi: AgenciesApi) {
+  constructor(route: ActivatedRoute, agenciesApi: AgenciesApi) {
     this.agencyId = route.snapshot.paramMap.get('id') || '';
-    agenciesApi.getById(this.agencyId).subscribe((data) => {this.agency= data});
+    this.agency$ = agenciesApi.getById$(this.agencyId)
   }
 
   ngOnInit(): void {

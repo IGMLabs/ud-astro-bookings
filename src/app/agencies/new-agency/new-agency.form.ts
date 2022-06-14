@@ -8,8 +8,6 @@ import { UtilitiesService } from 'src/app/core/utils/utilities.service';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 import { IdName } from 'src/app/core/api/id-name.interface';
-import { IdNameApi } from 'src/app/core/api/id-name.api';
-import { AgenciesApi } from 'src/app/core/api/agencies.api';
 import { Agency } from 'src/app/core/api/agency.interface';
 
 @Component({
@@ -22,7 +20,7 @@ export class NewAgencyForm extends FormBase implements OnInit {
   @Input() public statuses: string[] = [];
   @Output() public save = new EventEmitter<Agency>();
 
-  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService, idName: IdNameApi) {
+  constructor(formBuilder: FormBuilder, fms: FormMessagesService, private us: UtilitiesService) {
     super(fms);
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),

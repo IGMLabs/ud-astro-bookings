@@ -5,6 +5,10 @@ import { AgenciesList } from './components/agencies/agencies.list';
 import { TripsList } from './components/trips/trips.list';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookingsList } from './components/bookings/bookings.list';
+import { EmailControl } from './controls/email/email.control';
+import { TemplateControl } from './controls/template/template.control';
+import { SearchControl } from './controls/search/search.control';
 
 
 
@@ -12,7 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ReloadingComponent,
     AgenciesList,
-    TripsList
+    TripsList,
+    BookingsList,
+    EmailControl,
+    TemplateControl,
+    SearchControl
   ],
   imports: [
     CommonModule,
@@ -23,8 +31,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReloadingComponent,
     AgenciesList,
     TripsList,
+    BookingsList,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EmailControl,
+    TemplateControl,
+    SearchControl
   ]
 })
 export class SharedModule { }

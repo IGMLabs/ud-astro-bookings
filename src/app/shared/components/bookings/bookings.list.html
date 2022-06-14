@@ -1,0 +1,9 @@
+<article>
+  <h3>{{getBookingsLength()}} bookings</h3>
+  <ul>
+    <li *ngFor="let booking of bookings">
+      <a [routerLink]="['/','bookings','booking', booking.id ]">{{ booking.id }}</a>
+    </li>
+  </ul>
+  <button (click)="onReloadClick('bookings')"> 😎 </button>
+</article>

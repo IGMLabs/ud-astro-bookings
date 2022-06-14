@@ -1,2 +1,3 @@
-<app-trip-view  [tripId]="tripId"
+<app-trip-view  *ngIf="(trip$ | async) as trip"
+                [tripId]="tripId"
                 [trip]="trip"></app-trip-view>

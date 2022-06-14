@@ -32,9 +32,9 @@ export class FormMessagesService {
     let errorMessage = '';
     errorMessage += errors['required'] ? '🔥 Field is required ' : ' ';
     errorMessage += errors['minlength'] ? `🔥 More than ${errors['minlength'].requiredLength} chars`: ' ';
-    errorMessage += errors['maxlength'] ? `🔥 More than ${errors['maxlength'].requiredLength} chars`: ' ';
-    errorMessage += errors['max'] ? `🔥 More than ${errors['max'].max} `: ' ';
-    errorMessage += errors['min'] ? `🔥 Less than ${errors['min'].min} `: ' ';
+    errorMessage += errors['maxlength'] ? `🔥 Less than ${errors['maxlength'].requiredLength} chars`: ' ';
+    errorMessage += errors['max'] ? `🔥 Less than ${errors['max'].max} `: ' ';
+    errorMessage += errors['min'] ? `🔥 More than ${errors['min'].min} `: ' ';
     return errorMessage;
   }
 

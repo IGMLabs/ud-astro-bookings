@@ -11,47 +11,35 @@
         </select>
         <small *ngIf="mustShowMessage('agency')">{{ getErrorMessage('agency') }}</small>
       </div>
-      <div>
-        <label for="destination"> Destination</label>
-        <input name="destination"
-              type="text"
-              formControlName="destination"
-              [attr.aria-invalid]="hasError('destination')">
-        <small *ngIf="mustShowMessage('destination')">{{ getErrorMessage('destination') }}</small>
-      </div>
-      <div>
-        <label for="places"> Places</label>
-        <input name="places"
-              type="number"
-              formControlName="places"
-              [attr.aria-invalid]="hasError('places')">
-        <small *ngIf="mustShowMessage('places')">{{ getErrorMessage('places') }}</small>
-      </div>
-      <div>
-        <label for="startDate"> Start Date</label>
-        <input name="startDate"
-              type="date"
-              formControlName="startDate"
-              [attr.aria-invalid]="hasError('startDate')">
-        <small *ngIf="mustShowMessage('startDate')">{{ getErrorMessage('startDate') }}</small>
-      </div>
-      <div>
-        <label for="endDate"> End Date</label>
-        <input name="endDate"
-              type="date"
-              formControlName="endDate"
-              [attr.aria-invalid]="hasError('endDate')">
-        <small *ngIf="mustShowMessage('endDate')">{{ getErrorMessage('endDate') }}</small>
-        <small>{{getDatesMessage()}}</small>
-      </div>
-      <div>
-        <label for="flightPrice"> Flight Price</label>
-        <input name="flightPrice"
-              type="number"
-              formControlName="flightPrice"
-              [attr.aria-invalid]="hasError('flightPrice')">
-        <small *ngIf="mustShowMessage('flightPrice')">{{ getErrorMessage('flightPrice') }}</small>
-      </div>
+      <app-template-control [form]="form"
+                            formControlName="destination"
+                            label="Destination"
+                            placeholder="Destination">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="places"
+                            inputType="number"
+                            label="Places"
+                            placeholder="">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="startDate"
+                            inputType="date"
+                            label="Start Date"
+                            placeholder="">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="endDate"
+                            inputType="date"
+                            label="End Date"
+                            placeholder="">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="flightPrice"
+                            inputType="number"
+                            label="Flight Price"
+                            placeholder="">
+      </app-template-control>
     </fieldset>
   </div>
   <button [disabled]="form.invalid"

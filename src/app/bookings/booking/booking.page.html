@@ -1,0 +1,7 @@
+<app-booking-view *ngIf="(booking$ | async) as booking ; else waiting"
+                 [bookingId]="bookingId"
+                 [booking]="booking">
+</app-booking-view>
+<ng-template #waiting>
+  <h4>Waiting...</h4>
+</ng-template>

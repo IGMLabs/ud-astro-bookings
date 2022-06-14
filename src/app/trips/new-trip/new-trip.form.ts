@@ -9,8 +9,6 @@ import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 import { FormBase } from 'src/app/core/forms/form.base';
 import { Agency } from 'src/app/core/api/agency.interface';
-import { AgenciesApi } from 'src/app/core/api/agencies.api';
-import { TripsApi } from 'src/app/core/api/trips.api';
 import { Trip } from 'src/app/core/api/trip.interface';
 
 @Component({
@@ -27,8 +25,7 @@ export class NewTripForm extends FormBase implements OnInit {
     fvs: FormValidationsService,
     fms: FormMessagesService,
     private us: UtilitiesService,
-    agenciesApi: AgenciesApi,
-    private tripsApi: TripsApi
+
     ) {
     super(fms);
     this.form = formBuilder.group({

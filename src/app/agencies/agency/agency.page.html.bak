@@ -1,0 +1,3 @@
+<app-agency-view  [agencyId]="agencyId"
+                  [agency]="agency"></app-agency-view>
+<app-search></app-search>

@@ -18,7 +18,7 @@ export class FormValidationsService {
     }
     if (password.value !== confirmPassword.value){
       return {
-        passwordMatch: "Passwords don't mactch"
+        passwordMatch: "Passwords don't match"
       };
     }
     return null;

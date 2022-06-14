@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormMessagesService } from 'src/app/core/forms/form-messages.service';
 import { FormValidationsService } from 'src/app/core/forms/form-validations.service';
 import { FormBase } from 'src/app/core/forms/form.base';
@@ -15,7 +15,7 @@ export class RegisterForm extends FormBase implements OnInit {
     super(fms)
     this.form = formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl(''),
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]),
       acceptTerms: new FormControl(false, [Validators.requiredTrue]),

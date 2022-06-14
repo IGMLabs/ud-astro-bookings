@@ -1,0 +1,3 @@
+<app-agencies-list [ agencies$]=" agencies$"></app-agencies-list>
+<app-trips-list [trips]="trips"></app-trips-list>
+

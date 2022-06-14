@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+  <div>
+    <fieldset>
+      <div>
+        <label for="tripId"> TripId</label>
+        <select name="tripId"
+                formControlName="tripId">
+          <option value="">Select a trip</option>
+          <option *ngFor="let trip of trips"
+                  [value]="trip.id">{{ trip.id }}</option>
+        </select>
+        <small *ngIf="mustShowMessage('tripId')">{{ getErrorMessage('tripId') }}</small>
+      </div>
+      <app-template-control [form]="form"
+                            formControlName="passengerName"
+                            label="Passenger Name"
+                            placeholder="Passenger Name">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="luggageKilos"
+                            label="Luggage Kilos"
+                            inputType="number"
+                            placeholder="">
+      </app-template-control>
+      <app-template-control [form]="form"
+                            formControlName="hasPremiumFoodPrice"
+                            label="Premium Food Price"
+                            inputType="checkbox"
+                            placeholder="">
+      </app-template-control>
+    </fieldset>
+  </div>
+  <button [disabled]="form.invalid"
+          (click)="onSubmitClick()">Save</button>
+</form>

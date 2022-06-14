@@ -1,0 +1,12 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Trip } from './trip.interface';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TripsApi extends CrudApi<Trip> {
+  constructor(http: HttpClient, statusStore: StatusStore) {
+    super(http, 'trips', statusStore);
+  }
+}

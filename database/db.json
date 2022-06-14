@@ -19,6 +19,18 @@
       "name": "Virgin Way",
       "range": "Orbital",
       "status": "Pending"
+    },
+    {
+      "id": "esca-nasa",
+      "name": "Esca Nasa",
+      "range": "Orbital",
+      "status": "Active"
+    },
+    {
+      "id": "odindispofront",
+      "name": "odinDispoFront",
+      "range": "Interplanetary",
+      "status": "Active"
     }
   ],
   "trips": [

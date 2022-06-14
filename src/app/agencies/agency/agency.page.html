@@ -1,2 +1,3 @@
-<app-agency-view  [agencyId]="agencyId"
+<app-agency-view  *ngIf="(agency$ | async) as agency"
+                  [agencyId]="agencyId"
                   [agency]="agency"></app-agency-view>
