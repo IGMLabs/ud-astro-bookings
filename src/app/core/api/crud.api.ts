@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { catchError, of, pipe, tap } from 'rxjs';
+import { catchError, Observable, of, pipe, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StatusStore } from './status.store';
 
-export abstract class CrudApi<ApiType> {
-  private url = environment.apiUrl + this.endPoint + '/';
+export abstract class CrudApi<T> {
+  protected url = environment.apiUrl + this.endPoint + '/';
 
-  private statusPipe = pipe(
+  protected statusPipe = pipe(
     tap(() => this.notifyIdle()),
     catchError((err) => {
       this.notifyError(err.message);
@@ -15,34 +15,34 @@ export abstract class CrudApi<ApiType> {
   );
 
   constructor(
-    private http: HttpClient,
-    private endPoint: string,
+    protected http: HttpClient,
+    protected endPoint: string,
     protected statusStore: StatusStore
   ) {}
 
   public getAll$() {
     this.notifyWorking();
-    return this.http.get<ApiType[]>(this.url).pipe(this.statusPipe);
+    return this.http.get<T[]>(this.url).pipe(this.statusPipe);
   }
 
   public getById$(id: string) {
     this.notifyWorking();
-    return this.http.get<ApiType>(this.url + id).pipe(this.statusPipe);
+    return this.http.get<T>(this.url + id).pipe(this.statusPipe);
   }
 
-  public post$(payload: Partial<ApiType>) {
+  public post$(payload: Partial<T>) {
     this.notifyWorking();
-    return this.http.post<ApiType>(this.url, payload).pipe(this.statusPipe);
+    return this.http.post<T>(this.url, payload).pipe(this.statusPipe);
   }
 
-  public put$(id: string, payload: Partial<ApiType>) {
+  public put$(id: string, payload: Partial<T>) {
     this.notifyWorking();
-    return this.http.put<ApiType>(this.url + id, payload).pipe(this.statusPipe);
+    return this.http.put<T>(this.url + id, payload).pipe(this.statusPipe);
   }
 
   public delete$(id: string) {
     this.notifyWorking();
-    return this.http.delete<ApiType>(this.url + id).pipe(this.statusPipe);
+    return this.http.delete<T>(this.url + id).pipe(this.statusPipe);
   }
 
   private notifyWorking() {
@@ -54,5 +54,10 @@ export abstract class CrudApi<ApiType> {
   private notifyError(message: string) {
     console.warn({ isWorking: false, errorMessage: message });
     this.statusStore.setState({ isWorking: false, errorMessage: message });
+  }
+
+  public getByText$(text: string | null): Observable<T[]>{
+    if(text === null || text == '') return this.getAll$();
+    return this.http.get<T[]>(this.url + '?q=' + text);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { BookingsApi } from '../core/api/bookings.api';
 import { Booking } from '../core/api/booking.interface';
 
@@ -13,20 +13,27 @@ export class BookingsPage implements OnInit {
 
   public bookings$: Observable<Booking[]>;
   public error: boolean = false;
+  private search$: BehaviorSubject<string> = new BehaviorSubject('');
 
 
    constructor( private bookingsApi: BookingsApi ) {
 
-   this.bookings$ = this.bookingsApi.getAll$();
+    this.bookings$ = this.search$.pipe(
+      switchMap((searchTerm) => this.bookingsApi.getByText$(searchTerm))
+
+    );
    }
-
-
 
   onReload(){
     this.bookings$ = this.bookingsApi.getAll$();
   }
 
-    ngOnInit(): void {
-    }
+  onSearch(searchTerm: string) {
+    this.search$.next(searchTerm);
+    // this.agencies$ = this.agenciesApi.getByText$(searchTerm);
+  }
+
+  ngOnInit(): void {
+  }
 
   }

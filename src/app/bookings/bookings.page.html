@@ -2,6 +2,9 @@
   <a role="button"
     routerLink="booking/new">Add a new Booking</a>
 </nav>
+
+<app-search (search)="onSearch($event)"></app-search>
+
 <app-bookings-list *ngIf="(bookings$ | async) as bookings ; else waiting"
                  [bookings]="bookings"
                  (reload)="onReload()">

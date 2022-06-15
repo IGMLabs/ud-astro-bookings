@@ -1,4 +1,7 @@
 <a routerLink="trip/new">➕ Add a new Trip</a>
+
+<app-search (search)="onSearch($event)"></app-search>
+
 <app-trips-list   *ngIf="(trips$ | async) as trips"
                   [trips]="trips"
                   (reload)="onReload()"></app-trips-list>

@@ -7,29 +7,27 @@ import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Observable,
   styleUrls: ['./search.control.css']
 })
 export class SearchControl implements OnInit {
+  @ViewChild('searchInput', { static: true }) public searchInput!: ElementRef;
 
-  @ViewChild("searchInput", {static: true}) public searchInput!: ElementRef;
   @Output() search = new EventEmitter<string>();
 
-  public searchInput$!: Observable<String>
-  constructor() { }
+  // public searchInput$!: Observable<string>;
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.searchInput$ = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
-      map((event: unknown )=>{
-        return ( event as any ).target.value;
-      }),
-      tap((searchTerm)=>{
-
-      }),
-      debounceTime(1000),
-      tap((searchTerm)=>{
-
-      }),
-      filter((searchText) => searchText.length > 2),
+    const nativeSource$ = fromEvent(this.searchInput.nativeElement, 'keyup');
+    //this.searchInput$ =
+    nativeSource$.pipe(
+      map((event) => (event as any).target.value as string),
+      tap((searchTerm) => console.log('antes:', searchTerm)),
+      debounceTime(500),
+      tap((searchTerm) => console.log('después: ', searchTerm)),
+      filter((searchText) => searchText.length > 1),
+      tap((searchTerm) => console.log('filtrado: ', searchTerm)),
       distinctUntilChanged(),
-      tap((searchTerm: string)=> this.search.emit(searchTerm))
-    );
+      tap((searchTerm) => console.log('para buscar: ', searchTerm)),
+      //tap((searchTerm) => this.search.emit(searchTerm))
+    ).subscribe((searchTerm) => this.search.emit(searchTerm));
   }
-
 }
